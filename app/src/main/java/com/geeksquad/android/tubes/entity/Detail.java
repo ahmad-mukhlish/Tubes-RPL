@@ -3,14 +3,18 @@ package com.geeksquad.android.tubes.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by GOODWARE1 on 11/18/2017.
  */
 
 public class Detail implements Parcelable {
+
     private String produk;
     private int qty;
     private boolean done = false;
+    private List<Bahan> bahans;
 
 
     public boolean isDone() {
@@ -21,9 +25,10 @@ public class Detail implements Parcelable {
         this.done = done;
     }
 
-    public Detail(String produk, int qty) {
+    public Detail(String produk, int qty, List<Bahan> bahans) {
         this.produk = produk;
         this.qty = qty;
+        this.bahans = bahans;
     }
 
     protected Detail(Parcel in) {

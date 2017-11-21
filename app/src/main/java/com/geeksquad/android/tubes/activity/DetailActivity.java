@@ -107,7 +107,7 @@ public class DetailActivity extends AppCompatActivity {
 
             case R.id.note:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                View rootDialog = LayoutInflater.from(this).inflate(R.layout.keterangan_dialogue, null);
+                View rootDialog = LayoutInflater.from(this).inflate(R.layout.dialogue_keterangan, null);
                 TextView keterangan = rootDialog.findViewById(R.id.keterangan);
                 keterangan.setText(mBundle.getString("keterangan"));
 

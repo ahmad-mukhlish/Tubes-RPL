@@ -3,6 +3,7 @@ package com.geeksquad.android.tubes.networking.udacity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.geeksquad.android.tubes.entity.Bahan;
 import com.geeksquad.android.tubes.entity.Detail;
 import com.geeksquad.android.tubes.entity.Order;
 
@@ -45,7 +46,7 @@ final class QueryUtils {
             Log.e(LOG_TAG, "Error when closing input stream", e);
         }
 
-        return extract(Order.DUMMY_RESPONSE);
+        return extract(Order.HATTA_RESPONSE);
 
     }
 
@@ -136,22 +137,32 @@ final class QueryUtils {
             for (int i = 0; i < root.length(); i++) {
 
                 JSONObject orderNow = root.getJSONObject(i);
-                int no_meja = orderNow.getInt("no_meja");
+                int no_meja = orderNow.getInt("meja");
                 String tanggal = orderNow.getString("tanggal");
-                int items = orderNow.getInt("items");
-                JSONArray detail = orderNow.getJSONArray("detail");
+                String keterangan = orderNow.getString("catatan");
+                JSONArray listmakanan = orderNow.getJSONArray("listmakanan");
                 List<Detail> details = new ArrayList<>();
 
-                for (int j = 0; j < detail.length(); j++) {
-                    JSONObject detailObject = detail.getJSONObject(j);
-                    String produk = detailObject.getString("produk");
-                    int qty = detailObject.getInt("qty");
-                    details.add(new Detail(produk, qty));
+                for (int j = 0; j < listmakanan.length(); j++) {
+                    JSONObject detailNow = listmakanan.getJSONObject(j);
+                    String produk = detailNow.getString("nama");
+                    int qty = detailNow.getInt("qty");
+                    JSONArray bahan = detailNow.getJSONArray("bahan");
+
+                    List<Bahan> bahans = new ArrayList<>();
+
+                    for (int k = 0; k < bahan.length(); k++) {
+                        JSONObject bahanNow = bahan.getJSONObject(k);
+                        String namaBahan = bahanNow.getString("nama_bahan");
+                        int jumlahMakanan = bahanNow.getInt("jumlah_bahan");
+                        bahans.add(new Bahan(namaBahan, jumlahMakanan));
+                    }
+
+                    details.add(new Detail(produk, qty, bahans));
                 }
 
-                String keterangan = orderNow.getString("keterangan") ;
 
-                listOrders.add(new Order(no_meja,tanggal,keterangan,items,details)) ;
+                listOrders.add(new Order(no_meja, tanggal, keterangan, listmakanan.length(), details));
             }
 
 

@@ -47,11 +47,11 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
             }
         });
 
-        if (position % 2 != 0)
-        {
-            holder.mItemView.setBackgroundColor(Color.rgb(255,255,255));
+        if (position % 2 != 0) {
+            holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
         }
 
+        holder.mItemView.setOnClickListener(new DetailListener());
 
     }
 
@@ -76,6 +76,17 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
         }
 
 
+    }
+
+    private class DetailListener implements View.OnClickListener
+
+    {
+
+
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
 
