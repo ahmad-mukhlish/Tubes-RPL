@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.geeksquad.android.tubes.R;
@@ -38,6 +39,12 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
         final Detail currentDetail = mDetails.get(position);
         holder.mJudul.setText(currentDetail.getProduk());
         holder.mQty.setText(currentDetail.getQty() + "");
+        holder.mCheckDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentDetail.setDone(holder.mCheckDone.isChecked());
+            }
+        });
 
 
     }
@@ -51,12 +58,14 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
 
         TextView mJudul, mQty;
         View mItemView;
+        CheckBox mCheckDone;
 
 
         OrderViewHolder(View itemView) {
             super(itemView);
             mJudul = itemView.findViewById(R.id.judul);
             mQty = itemView.findViewById(R.id.qty);
+            mCheckDone = itemView.findViewById(R.id.check_done);
             mItemView = itemView;
         }
 

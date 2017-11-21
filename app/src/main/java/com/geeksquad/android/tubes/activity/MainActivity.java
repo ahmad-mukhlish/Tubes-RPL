@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mOrders = null;
 
         mSwipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
         mLoading = (LinearLayout) findViewById(R.id.loading);
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void updateUI(List<Order> orderList) {
         mActionBar.show();
         mLoading.setVisibility(View.GONE);
-        mOrderRecycleAdapter = new OrderRecycleAdapter(this,orderList) ;
+        mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
         mRecyclerView.setAdapter(mOrderRecycleAdapter);
     }
 
@@ -153,5 +156,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onDestroy() {
         super.onDestroy();
         mOrders = null;
+        Log.v("cek", "cik");
+
     }
 }

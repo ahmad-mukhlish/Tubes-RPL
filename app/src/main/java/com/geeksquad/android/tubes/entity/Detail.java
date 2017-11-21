@@ -10,6 +10,16 @@ import android.os.Parcelable;
 public class Detail implements Parcelable {
     private String produk;
     private int qty;
+    private boolean done = false;
+
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 
     public Detail(String produk, int qty) {
         this.produk = produk;
