@@ -24,9 +24,9 @@ public class LoginActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_login);
-        edUser = (EditText) findViewById(R.id.edUsername);
-        edPass = (EditText) findViewById(R.id.edPassword);
-        login = (Button) findViewById(R.id.login);
+        edUser = findViewById(R.id.edUsername);
+        edPass = findViewById(R.id.edPassword);
+        login = findViewById(R.id.login);
 
     }
 

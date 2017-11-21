@@ -1,6 +1,7 @@
 package com.geeksquad.android.tubes.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,11 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
                 currentDetail.setDone(holder.mCheckDone.isChecked());
             }
         });
+
+        if (position % 2 != 0)
+        {
+            holder.mItemView.setBackgroundColor(Color.rgb(255,255,255));
+        }
 
 
     }

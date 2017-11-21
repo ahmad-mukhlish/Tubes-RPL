@@ -96,7 +96,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
                 intent.putExtra("detail", (ArrayList<Detail>) clickedOrder.getDetail());
                 view.getContext().startActivity(intent);
             } else {
-                Toast.makeText(view.getContext(),"Silakan kerjakan yang paling atas dahulu..",Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Silakan kerjakan yang paling atas dahulu..", Toast.LENGTH_SHORT).show();
 
             }
         }

@@ -3,11 +3,16 @@ package com.geeksquad.android.tubes.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
@@ -20,20 +25,22 @@ public class DetailActivity extends AppCompatActivity {
 
     List<Detail> mDetail;
     int mItems;
+    Bundle mBundle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Bundle bundle = getIntent().getExtras();
-        mDetail = bundle.getParcelableArrayList("detail");
-        mItems = bundle.getInt("items");
+        mBundle = getIntent().getExtras();
+        mDetail = mBundle.getParcelableArrayList("detail");
+        mItems = mBundle.getInt("items");
 
         DetailRecycleAdapter billingRecycleAdapter =
                 new DetailRecycleAdapter(this, mDetail);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvBilling);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvDetail);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
 
         recyclerView.setHasFixedSize(true);
@@ -44,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         Button done = (Button) findViewById(R.id.done);
         done.setOnClickListener(new doneListener(this));
 
-        setTitle("Pesanan Meja " + bundle.getInt("no_meja"));
+        setTitle("Pesanan Meja " + mBundle.getInt("no_meja"));
 
 
     }
@@ -74,6 +81,7 @@ public class DetailActivity extends AppCompatActivity {
                 //TODO make database delete stuff here via retrofit before intent back to MainActivity
                 //TODO make notif to waiter
 
+
                 startActivity(new Intent(mContext, MainActivity.class));
 
 
@@ -84,6 +92,41 @@ public class DetailActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+
+            case R.id.note:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View rootDialog = LayoutInflater.from(this).inflate(R.layout.keterangan_dialogue, null);
+                TextView keterangan = rootDialog.findViewById(R.id.keterangan);
+                keterangan.setText(mBundle.getString("keterangan"));
+
+                builder.setView(rootDialog);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+                TextView ok = rootDialog.findViewById(R.id.ok);
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
