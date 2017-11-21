@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="Item Name"
+            android:text="@string/item_name"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Qty"
+            android:text="@string/qty"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
@@ -38,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:text="Done"
+            android:text="@string/done"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Done All" />
+            android:text="@string/done_all" />
 
 
     </LinearLayout>

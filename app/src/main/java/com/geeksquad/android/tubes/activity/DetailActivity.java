@@ -44,6 +44,8 @@ public class DetailActivity extends AppCompatActivity {
         Button done = (Button) findViewById(R.id.done);
         done.setOnClickListener(new doneListener(this));
 
+        setTitle("Pesanan Meja " + bundle.getInt("no_meja"));
+
 
     }
 

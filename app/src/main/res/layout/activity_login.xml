@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Chef ver."
+            android:text="@string/version"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
@@ -65,7 +65,7 @@
             android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray"
             android:onClick="login"
-            android:text="login"
+            android:text="@string/login"
             android:textAllCaps="true"
             android:textSize="15sp" />
     </LinearLayout>

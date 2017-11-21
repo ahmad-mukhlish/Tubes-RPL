@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.activity.DetailActivity;
@@ -83,14 +84,21 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
 
         @Override
         public void onClick(View view) {
-            Order clickedOrder = mOrders.get(position);
-            Intent intent = new Intent(mContext, DetailActivity.class);
-            intent.putExtra("no_meja", clickedOrder.getNo_meja());
-            intent.putExtra("tanggal", clickedOrder.getTanggal());
-            intent.putExtra("items", clickedOrder.getItems());
-            intent.putExtra("keterangan", clickedOrder.getKeterangan());
-            intent.putExtra("detail", (ArrayList<Detail>) clickedOrder.getDetail());
-            view.getContext().startActivity(intent);
+
+
+            if (position == 0) {
+                Order clickedOrder = mOrders.get(position);
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("no_meja", clickedOrder.getNo_meja());
+                intent.putExtra("tanggal", clickedOrder.getTanggal());
+                intent.putExtra("items", clickedOrder.getItems());
+                intent.putExtra("keterangan", clickedOrder.getKeterangan());
+                intent.putExtra("detail", (ArrayList<Detail>) clickedOrder.getDetail());
+                view.getContext().startActivity(intent);
+            } else {
+                Toast.makeText(view.getContext(),"Silakan kerjakan yang paling atas dahulu..",Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 }

@@ -1,27 +1,10 @@
 <resources>
     <string name="app_name">Chef Pak Broto</string>
-    <string-array name="order_no">
-        <item>#1</item>
-        <item>#2</item>
-        <item>#3</item>
-        <item>#4</item>
-        <item>#5</item>
-        <item>#6</item>
-        <item>#7</item>
-        <item>#8</item>
-        <item>#9</item>
-        <item>#10</item>
-    </string-array>
-    <string-array name="time_order">
-        <item>11.30, 24/10/17</item>
-        <item>11.33, 24/10/17</item>
-        <item>11.37, 24/10/17</item>
-        <item>11.39, 24/10/17</item>
-        <item>11.46, 24/10/17</item>
-        <item>11.49, 24/10/17</item>
-        <item>11.51, 24/10/17</item>
-        <item>11.58, 24/10/17</item>
-        <item>12.07, 24/10/17</item>
-        <item>12.16, 24/10/17</item>
-    </string-array>
+    <string name="done">Done</string>
+    <string name="done_all">Done All</string>
+    <string name="qty">Qty</string>
+    <string name="item_name">Item Name</string>
+    <string name="login">login</string>
+    <string name="version">Chef ver.</string>
+    <string name="no_internet_connection">No Internet Connection...</string>
 </resources>
