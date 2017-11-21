@@ -16,7 +16,7 @@ public class Order {
     public static final String JSON_REPLY_MENU = "server.php?operasi=view";
 
     public static String DUMMY_RESPONSE =
-            "[{\"no_meja\":8,\"tanggal\":\"2017-11-08  14:10:00\",\"items\":3,\"detail\":[{\"produk\":\"Wajit\",\"qty\":2},{\"produk\":\"Bakso\",\"qty\":2},{\"produk\":\"Bajigur\",\"qty\":2}],\"keterangan\":\"Wajitnya jangan pake saus tartar\"}," +
+            "[{\"no_meja\":9,\"tanggal\":\"2017-11-08  14:10:00\",\"items\":3,\"detail\":[{\"produk\":\"Wajit\",\"qty\":2},{\"produk\":\"Bakso\",\"qty\":2},{\"produk\":\"Bajigur\",\"qty\":2}],\"keterangan\":\"Wajitnya jangan pake saus tartar\"}," +
                     "{\"no_meja\":1,\"tanggal\":\"2017-11-08  09:10:00\",\"items\":3,\"detail\":[{\"produk\":\"Tiramisu\",\"qty\":2},{\"produk\":\"Nasi goreng\",\"qty\":2},{\"produk\":\"Cola\",\"qty\":2}],\"keterangan\":\"Colanya jangan pake lama\"}]";
 
 
