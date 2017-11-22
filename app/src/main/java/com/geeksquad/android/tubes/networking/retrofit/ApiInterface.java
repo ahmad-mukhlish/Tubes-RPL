@@ -13,6 +13,6 @@ import retrofit2.http.GET;
  */
 
 public interface ApiInterface {
-    @GET(Order.JSON_REPLY_MENU)
+    @GET(Order.JSON_REPLY_KOKI)
     Call<List<Order>> getOrder();
 }

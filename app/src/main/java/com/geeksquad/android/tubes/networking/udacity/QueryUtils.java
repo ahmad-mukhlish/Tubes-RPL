@@ -46,7 +46,7 @@ final class QueryUtils {
             Log.e(LOG_TAG, "Error when closing input stream", e);
         }
 
-        return extract(Order.HATTA_RESPONSE);
+        return extract(jsonResponse);
 
     }
 
@@ -157,6 +157,8 @@ final class QueryUtils {
                         int jumlahMakanan = bahanNow.getInt("jumlah_bahan");
                         bahans.add(new Bahan(namaBahan, jumlahMakanan));
                     }
+
+
 
                     makanans.add(new Makanan(produk, qty, bahans));
                 }

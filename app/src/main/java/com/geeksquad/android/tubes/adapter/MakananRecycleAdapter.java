@@ -2,6 +2,8 @@ package com.geeksquad.android.tubes.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,7 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
 
     @Override
     public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.each_order_detail, parent, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.each_makanan, parent, false);
         return new OrderViewHolder(itemView);
     }
 
@@ -51,7 +53,7 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
             holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
         }
 
-        holder.mItemView.setOnClickListener(new MakananListener());
+        holder.mItemView.setOnClickListener(new MakananListener(position));
 
     }
 
@@ -82,9 +84,43 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
 
     {
 
+        private int mPosition;
+
+        public MakananListener(int mPosition) {
+            this.mPosition = mPosition;
+        }
 
         @Override
         public void onClick(View view) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            View rootDialog = LayoutInflater.from(mContext).inflate(R.layout.dialogue_bahan, null);
+
+
+
+            BahanRecycleAdapter bahanRecycleAdapter =
+                    new BahanRecycleAdapter(mContext, mMakanans.get(mPosition).getBahans());
+
+            RecyclerView recyclerView = rootDialog.findViewById(R.id.rvBahan);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(mContext, 1);
+
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(bahanRecycleAdapter);
+
+
+            builder.setView(rootDialog);
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+
+
+            TextView ok = rootDialog.findViewById(R.id.ok);
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
 
         }
     }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mSwipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
         mLoading = (LinearLayout) findViewById(R.id.loading);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvOrder);
         LinearLayout error = (LinearLayout) findViewById(R.id.error);
 
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<Order>> onCreateLoader(int i, Bundle bundle) {
-        return new OrderLoader(this, "");
+        return new OrderLoader(this, Order.BASE_PATH + Order.JSON_REPLY_KOKI);
 
     }
 

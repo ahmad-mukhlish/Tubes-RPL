@@ -17,23 +17,11 @@ public class Makanan implements Parcelable {
     private List<Bahan> bahans;
 
 
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    public Makanan(String produk, int qty, List<Bahan> bahans) {
-        this.produk = produk;
-        this.qty = qty;
-        this.bahans = bahans;
-    }
-
     protected Makanan(Parcel in) {
         produk = in.readString();
         qty = in.readInt();
+        done = in.readByte() != 0;
+        bahans = in.createTypedArrayList(Bahan.CREATOR);
     }
 
     public static final Creator<Makanan> CREATOR = new Creator<Makanan>() {
@@ -48,6 +36,26 @@ public class Makanan implements Parcelable {
         }
     };
 
+    public List<Bahan> getBahans() {
+        return bahans;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public Makanan(String produk, int qty, List<Bahan> bahans) {
+        this.produk = produk;
+        this.qty = qty;
+        this.bahans = bahans;
+    }
+
+
+
     public String getProduk() {
         return produk;
     }
@@ -55,6 +63,7 @@ public class Makanan implements Parcelable {
     public int getQty() {
         return qty;
     }
+
 
     @Override
     public int describeContents() {
@@ -65,5 +74,7 @@ public class Makanan implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(produk);
         parcel.writeInt(qty);
+        parcel.writeByte((byte) (done ? 1 : 0));
+        parcel.writeTypedList(bahans);
     }
 }

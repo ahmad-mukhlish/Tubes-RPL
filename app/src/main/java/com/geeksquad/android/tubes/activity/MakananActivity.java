@@ -31,21 +31,22 @@ public class MakananActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_makanan);
 
         mBundle = getIntent().getExtras();
         mMakanans = mBundle.getParcelableArrayList("makanan");
         mItems = mBundle.getInt("items");
 
-        MakananRecycleAdapter billingRecycleAdapter =
+
+        MakananRecycleAdapter makananRecycleAdapter =
                 new MakananRecycleAdapter(this, mMakanans);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvDetail);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvMakanan);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(billingRecycleAdapter);
+        recyclerView.setAdapter(makananRecycleAdapter);
 
 
         Button done = (Button) findViewById(R.id.done);
