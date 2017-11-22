@@ -25,7 +25,7 @@
             android:name=".activity.MainActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.DetailActivity"
+            android:name=".activity.MakananActivity"
             android:parentActivityName=".activity.MainActivity" />
     </application>
 

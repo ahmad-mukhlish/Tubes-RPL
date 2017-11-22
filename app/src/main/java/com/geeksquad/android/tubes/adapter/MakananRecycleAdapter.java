@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.geeksquad.android.tubes.R;
-import com.geeksquad.android.tubes.entity.Detail;
+import com.geeksquad.android.tubes.entity.Makanan;
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ import java.util.List;
  * Created by GOODWARE1 on 9/2/2017.
  */
 
-public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdapter.OrderViewHolder> {
+public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAdapter.OrderViewHolder> {
 
     private Context mContext;
-    private List<Detail> mDetails;
+    private List<Makanan> mMakanans;
 
-    public DetailRecycleAdapter(Context mContext, List<Detail> details) {
+    public MakananRecycleAdapter(Context mContext, List<Makanan> makanans) {
         this.mContext = mContext;
-        this.mDetails = details;
+        this.mMakanans = makanans;
     }
 
     @Override
@@ -37,13 +37,13 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
 
     @Override
     public void onBindViewHolder(final OrderViewHolder holder, int position) {
-        final Detail currentDetail = mDetails.get(position);
-        holder.mJudul.setText(currentDetail.getProduk());
-        holder.mQty.setText(currentDetail.getQty() + "");
+        final Makanan currentMakanan = mMakanans.get(position);
+        holder.mJudul.setText(currentMakanan.getProduk());
+        holder.mQty.setText(currentMakanan.getQty() + "");
         holder.mCheckDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentDetail.setDone(holder.mCheckDone.isChecked());
+                currentMakanan.setDone(holder.mCheckDone.isChecked());
             }
         });
 
@@ -51,13 +51,13 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
             holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
         }
 
-        holder.mItemView.setOnClickListener(new DetailListener());
+        holder.mItemView.setOnClickListener(new MakananListener());
 
     }
 
     @Override
     public int getItemCount() {
-        return mDetails.size();
+        return mMakanans.size();
     }
 
     class OrderViewHolder extends RecyclerView.ViewHolder {
@@ -78,7 +78,7 @@ public class DetailRecycleAdapter extends RecyclerView.Adapter<DetailRecycleAdap
 
     }
 
-    private class DetailListener implements View.OnClickListener
+    private class MakananListener implements View.OnClickListener
 
     {
 

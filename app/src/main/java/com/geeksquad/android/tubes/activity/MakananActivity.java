@@ -16,14 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
-import com.geeksquad.android.tubes.adapter.DetailRecycleAdapter;
-import com.geeksquad.android.tubes.entity.Detail;
+import com.geeksquad.android.tubes.adapter.MakananRecycleAdapter;
+import com.geeksquad.android.tubes.entity.Makanan;
 
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity {
+public class MakananActivity extends AppCompatActivity {
 
-    List<Detail> mDetail;
+    List<Makanan> mMakanans;
     int mItems;
     Bundle mBundle;
 
@@ -34,11 +34,11 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         mBundle = getIntent().getExtras();
-        mDetail = mBundle.getParcelableArrayList("detail");
+        mMakanans = mBundle.getParcelableArrayList("makanan");
         mItems = mBundle.getInt("items");
 
-        DetailRecycleAdapter billingRecycleAdapter =
-                new DetailRecycleAdapter(this, mDetail);
+        MakananRecycleAdapter billingRecycleAdapter =
+                new MakananRecycleAdapter(this, mMakanans);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvDetail);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -68,9 +68,9 @@ public class DetailActivity extends AppCompatActivity {
         public void onClick(View view) {
             int checkDetail = 0;
 
-            for (Detail detailNow : mDetail) {
+            for (Makanan makananNow : mMakanans) {
 
-                if (detailNow.isDone()) {
+                if (makananNow.isDone()) {
                     checkDetail++;
                 }
 

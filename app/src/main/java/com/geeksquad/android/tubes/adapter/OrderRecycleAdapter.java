@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
-import com.geeksquad.android.tubes.activity.DetailActivity;
-import com.geeksquad.android.tubes.entity.Detail;
+import com.geeksquad.android.tubes.activity.MakananActivity;
+import com.geeksquad.android.tubes.entity.Makanan;
 import com.geeksquad.android.tubes.entity.Order;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
     @Override
     public void onBindViewHolder(OrderViewHolder holder, int position) {
         Order orderNow = mOrders.get(position);
-        holder.noTable.setText("Meja " + orderNow.getNo_meja());
+        holder.noTable.setText("Meja " + orderNow.getMeja());
         holder.dateOrder.setText(orderNow.getTanggal());
         holder.items.setText(orderNow.getItems() + " items");
         holder.rootView.setOnClickListener(new DetailListener(position));
@@ -88,12 +88,12 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
 
             if (position == 0) {
                 Order clickedOrder = mOrders.get(position);
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra("no_meja", clickedOrder.getNo_meja());
+                Intent intent = new Intent(mContext, MakananActivity.class);
+                intent.putExtra("no_meja", clickedOrder.getMeja());
                 intent.putExtra("tanggal", clickedOrder.getTanggal());
                 intent.putExtra("items", clickedOrder.getItems());
-                intent.putExtra("keterangan", clickedOrder.getKeterangan());
-                intent.putExtra("detail", (ArrayList<Detail>) clickedOrder.getDetail());
+                intent.putExtra("keterangan", clickedOrder.getCatatan());
+                intent.putExtra("makanan", (ArrayList<Makanan>) clickedOrder.getListmakanan());
                 view.getContext().startActivity(intent);
             } else {
                 Toast.makeText(view.getContext(), "Silakan kerjakan yang paling atas dahulu..", Toast.LENGTH_SHORT).show();

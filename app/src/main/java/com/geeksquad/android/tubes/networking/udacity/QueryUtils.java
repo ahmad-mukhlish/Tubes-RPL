@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.geeksquad.android.tubes.entity.Bahan;
-import com.geeksquad.android.tubes.entity.Detail;
+import com.geeksquad.android.tubes.entity.Makanan;
 import com.geeksquad.android.tubes.entity.Order;
 
 import org.json.JSONArray;
@@ -141,13 +141,13 @@ final class QueryUtils {
                 String tanggal = orderNow.getString("tanggal");
                 String keterangan = orderNow.getString("catatan");
                 JSONArray listmakanan = orderNow.getJSONArray("listmakanan");
-                List<Detail> details = new ArrayList<>();
+                List<Makanan> makanans = new ArrayList<>();
 
                 for (int j = 0; j < listmakanan.length(); j++) {
-                    JSONObject detailNow = listmakanan.getJSONObject(j);
-                    String produk = detailNow.getString("nama");
-                    int qty = detailNow.getInt("qty");
-                    JSONArray bahan = detailNow.getJSONArray("bahan");
+                    JSONObject makananNow = listmakanan.getJSONObject(j);
+                    String produk = makananNow.getString("nama");
+                    int qty = makananNow.getInt("qty");
+                    JSONArray bahan = makananNow.getJSONArray("bahan");
 
                     List<Bahan> bahans = new ArrayList<>();
 
@@ -158,11 +158,11 @@ final class QueryUtils {
                         bahans.add(new Bahan(namaBahan, jumlahMakanan));
                     }
 
-                    details.add(new Detail(produk, qty, bahans));
+                    makanans.add(new Makanan(produk, qty, bahans));
                 }
 
 
-                listOrders.add(new Order(no_meja, tanggal, keterangan, listmakanan.length(), details));
+                listOrders.add(new Order(no_meja, tanggal, keterangan, listmakanan.length(), makanans));
             }
 
 

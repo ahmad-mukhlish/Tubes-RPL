@@ -27,7 +27,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Order>> {
     private static final int LOADER_ID = 54;
-    private String mLink;
     private OrderRecycleAdapter mOrderRecycleAdapter;
     public static List<Order> mOrders = null;
     private RecyclerView mRecyclerView;
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public boolean onQueryTextSubmit(@NonNull String query) {
                 List<Order> selectedOrders = new ArrayList<Order>();
                 for (Order currentOrder : mOrders) {
-                    if ((currentOrder.getNo_meja() + "").toLowerCase().contains(query.toLowerCase())) {
+                    if ((currentOrder.getMeja() + "").toLowerCase().contains(query.toLowerCase())) {
                         selectedOrders.add(currentOrder);
                     }
                 }

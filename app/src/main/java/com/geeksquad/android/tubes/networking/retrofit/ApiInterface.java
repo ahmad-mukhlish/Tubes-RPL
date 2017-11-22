@@ -14,5 +14,5 @@ import retrofit2.http.GET;
 
 public interface ApiInterface {
     @GET(Order.JSON_REPLY_MENU)
-    Call<List<Order>> getMakanan();
+    Call<List<Order>> getOrder();
 }

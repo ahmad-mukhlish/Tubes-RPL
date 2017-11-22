@@ -9,7 +9,7 @@ import java.util.List;
  * Created by GOODWARE1 on 11/18/2017.
  */
 
-public class Detail implements Parcelable {
+public class Makanan implements Parcelable {
 
     private String produk;
     private int qty;
@@ -25,26 +25,26 @@ public class Detail implements Parcelable {
         this.done = done;
     }
 
-    public Detail(String produk, int qty, List<Bahan> bahans) {
+    public Makanan(String produk, int qty, List<Bahan> bahans) {
         this.produk = produk;
         this.qty = qty;
         this.bahans = bahans;
     }
 
-    protected Detail(Parcel in) {
+    protected Makanan(Parcel in) {
         produk = in.readString();
         qty = in.readInt();
     }
 
-    public static final Creator<Detail> CREATOR = new Creator<Detail>() {
+    public static final Creator<Makanan> CREATOR = new Creator<Makanan>() {
         @Override
-        public Detail createFromParcel(Parcel in) {
-            return new Detail(in);
+        public Makanan createFromParcel(Parcel in) {
+            return new Makanan(in);
         }
 
         @Override
-        public Detail[] newArray(int size) {
-            return new Detail[size];
+        public Makanan[] newArray(int size) {
+            return new Makanan[size];
         }
     };
 
