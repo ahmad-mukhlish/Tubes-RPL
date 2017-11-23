@@ -3,6 +3,7 @@ package com.geeksquad.android.tubes.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import com.geeksquad.android.tubes.activity.MakananActivity;
 import com.geeksquad.android.tubes.entity.Makanan;
 import com.geeksquad.android.tubes.entity.Order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by ASUS on 25/10/2017.
@@ -42,7 +46,9 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
     public void onBindViewHolder(OrderViewHolder holder, int position) {
         Order orderNow = mOrders.get(position);
         holder.noTable.setText("Meja " + orderNow.getMeja());
-        holder.dateOrder.setText(orderNow.getTanggal());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+
+        holder.dateOrder.setText(getFormattedDate(orderNow.getTanggal(),df));
         holder.items.setText(orderNow.getItems() + " items");
         holder.rootView.setOnClickListener(new DetailListener(position));
 
@@ -101,4 +107,20 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
             }
         }
     }
+
+
+    private String getFormattedDate(String stringDate, SimpleDateFormat sdf) {
+        SimpleDateFormat output = new SimpleDateFormat("HH:mm:ss",Locale.ENGLISH);
+        Date date = new Date() ;
+
+        try {
+            date = sdf.parse(stringDate);
+        } catch (java.text.ParseException e) {
+            Log.e("apa", "jelly", e);
+        }
+
+
+        return output.format(date);
+    }
+
 }
