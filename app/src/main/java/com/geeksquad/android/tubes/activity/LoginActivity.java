@@ -37,6 +37,7 @@ public class LoginActivity extends Activity {
         if (stuser.equals(Order.USERNAME) && stpass.equals(Order.PASSWORD)) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish() ;
         } else {
             Toast.makeText(this, "Username atau password tidak sesuai", Toast.LENGTH_SHORT).show();
         }

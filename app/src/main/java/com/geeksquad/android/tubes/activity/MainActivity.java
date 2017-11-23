@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
@@ -155,5 +156,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onDestroy();
         mOrders = null;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this,"Sudah menu utama, tidak bisa kembali lagi..",Toast.LENGTH_SHORT).show();
     }
 }

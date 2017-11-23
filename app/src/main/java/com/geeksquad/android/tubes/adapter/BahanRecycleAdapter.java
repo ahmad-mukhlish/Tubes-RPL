@@ -1,6 +1,7 @@
 package com.geeksquad.android.tubes.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,10 @@ public class BahanRecycleAdapter extends RecyclerView.Adapter<BahanRecycleAdapte
         holder.mIngredient.setText(currentBahan.getNama_bahan());
         holder.mGram.setText(currentBahan.getJumlah_bahan() + "");
 
+        if (position % 2 != 0) {
+            holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
+        }
+
     }
 
 
@@ -52,13 +57,13 @@ public class BahanRecycleAdapter extends RecyclerView.Adapter<BahanRecycleAdapte
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView mIngredient, mGram;
-        View rootView;
+        View mItemView;
 
         public OrderViewHolder(View itemView) {
             super(itemView);
             mIngredient = itemView.findViewById(R.id.ingredient);
             mGram = itemView.findViewById(R.id.gram);
-            rootView = itemView;
+            mItemView = itemView;
         }
     }
 
