@@ -110,7 +110,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
 
 
     private String getFormattedDate(String stringDate, SimpleDateFormat sdf) {
-        SimpleDateFormat output = new SimpleDateFormat("HH:mm:ss",Locale.ENGLISH);
+        SimpleDateFormat output = new SimpleDateFormat("HH:mm",Locale.ENGLISH);
         Date date = new Date() ;
 
         try {

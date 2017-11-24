@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksquad.android.tubes.R;
@@ -23,8 +24,11 @@ import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Order;
 import com.geeksquad.android.tubes.networking.udacity.OrderLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Order>> {
     private static final int LOADER_ID = 54;
@@ -103,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
+
+        TextView tanggal = (TextView) findViewById(R.id.tanggal);
+        tanggal.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("id")).format(Calendar.getInstance().getTime()));
     }
 
 
@@ -160,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this,"Sudah menu utama, tidak bisa kembali lagi..",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sudah menu utama, tidak bisa kembali lagi..", Toast.LENGTH_SHORT).show();
     }
+
 }
