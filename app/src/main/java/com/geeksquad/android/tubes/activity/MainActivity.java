@@ -2,6 +2,7 @@ package com.geeksquad.android.tubes.activity;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -154,6 +155,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             case R.id.search:
                 mSearchView.onOptionsItemSelected(getFragmentManager(), item);
                 break;
+
+            case R.id.logout:
+                mOrders = null;
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
