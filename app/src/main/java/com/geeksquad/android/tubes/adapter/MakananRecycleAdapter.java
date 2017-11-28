@@ -16,12 +16,9 @@ import com.geeksquad.android.tubes.entity.Makanan;
 
 import java.util.List;
 
-
-/**
- * Created by GOODWARE1 on 9/2/2017.
- */
-
 public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAdapter.OrderViewHolder> {
+
+    private final String LOG_TAG = MakananRecycleAdapter.class.getName();
 
     private Context mContext;
     private List<Makanan> mMakanans;
@@ -40,12 +37,12 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
     @Override
     public void onBindViewHolder(final OrderViewHolder holder, int position) {
         final Makanan currentMakanan = mMakanans.get(position);
-        holder.mJudul.setText(currentMakanan.getProduk());
-        holder.mQty.setText(currentMakanan.getQty() + "");
+        holder.mJudul.setText(currentMakanan.getmProduk());
+        holder.mQty.setText(currentMakanan.getmQty() + "");
         holder.mCheckDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentMakanan.setDone(holder.mCheckDone.isChecked());
+                currentMakanan.setmDone(holder.mCheckDone.isChecked());
             }
         });
 
@@ -93,13 +90,19 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
         @Override
         public void onClick(View view) {
 
+            dialogueBahan();
+
+        }
+
+
+        private void dialogueBahan() {
+
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             View rootDialog = LayoutInflater.from(mContext).inflate(R.layout.dialogue_bahan, null);
 
 
-
             BahanRecycleAdapter bahanRecycleAdapter =
-                    new BahanRecycleAdapter(mContext, mMakanans.get(mPosition).getBahans());
+                    new BahanRecycleAdapter(mContext, mMakanans.get(mPosition).getmBahans());
 
             RecyclerView recyclerView = rootDialog.findViewById(R.id.rvBahan);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(mContext, 1);
@@ -121,8 +124,9 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
                     dialog.dismiss();
                 }
             });
-
         }
+
+
     }
 
 

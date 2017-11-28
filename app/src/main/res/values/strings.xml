@@ -1,10 +1,28 @@
 <resources>
-    <string name="app_name">Chef Pak Broto</string>
+    <string name="app_name">Mr. Broto Chef </string>
     <string name="done">Done</string>
     <string name="done_all">Done All</string>
     <string name="qty">Qty</string>
     <string name="item_name">Item Name</string>
     <string name="login">login</string>
     <string name="version">Chef ver.</string>
-    <string name="no_internet_connection">No Internet Connection...</string>
+    <string name="no_internet_connection">No Internet Connection..</string>
+    <string name="password_mismatch">Username or password is incorrect</string>
+    <string name="main_menu">You have reached the main menu..</string>
+    <string name="logout">Logout success..</string>
+    <string name="ok">OK</string>
+    <string name="log_out_menu">Log out</string>
+    <string name="order_table">Order table </string>
+    <string name="undone">Unfinished item(s)..</string>
+    <string name="table">Table  </string>
+    <string name="up">Please finish the first order..</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="grams">Grams</string>
+    <string name="note">Note</string>
+    <string name="search">Search</string>
+    <string name="logout_menu">Logout</string>
 </resources>
+
+

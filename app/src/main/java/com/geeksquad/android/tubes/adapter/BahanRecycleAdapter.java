@@ -13,11 +13,10 @@ import com.geeksquad.android.tubes.entity.Bahan;
 
 import java.util.List;
 
-/**
- * Created by GOODWARE1 on 11/22/2017.
- */
 
 public class BahanRecycleAdapter extends RecyclerView.Adapter<BahanRecycleAdapter.OrderViewHolder> {
+
+    private final String LOG_TAG = BahanRecycleAdapter.class.getName();
 
 
     private Context mContext;
@@ -39,8 +38,8 @@ public class BahanRecycleAdapter extends RecyclerView.Adapter<BahanRecycleAdapte
     public void onBindViewHolder(OrderViewHolder holder, int position) {
 
         Bahan currentBahan = mBahans.get(position);
-        holder.mIngredient.setText(currentBahan.getNama_bahan());
-        holder.mGram.setText(currentBahan.getJumlah_bahan() + "");
+        holder.mIngredient.setText(currentBahan.getmNamaBahan());
+        holder.mGram.setText(currentBahan.getmJumlahBahan() + "");
 
         if (position % 2 != 0) {
             holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
@@ -55,11 +54,11 @@ public class BahanRecycleAdapter extends RecyclerView.Adapter<BahanRecycleAdapte
     }
 
 
-    public static class OrderViewHolder extends RecyclerView.ViewHolder {
+    static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView mIngredient, mGram;
         View mItemView;
 
-        public OrderViewHolder(View itemView) {
+        OrderViewHolder(View itemView) {
             super(itemView);
             mIngredient = itemView.findViewById(R.id.ingredient);
             mGram = itemView.findViewById(R.id.gram);

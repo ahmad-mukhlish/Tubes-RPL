@@ -5,23 +5,21 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/**
- * Created by GOODWARE1 on 11/18/2017.
- */
-
 public class Makanan implements Parcelable {
 
-    private String produk;
-    private int qty;
-    private boolean done = false;
-    private List<Bahan> bahans;
+    private final String LOG_TAG = Makanan.class.getName();
+
+    private String mProduk;
+    private int mQty;
+    private boolean mDone = false;
+    private List<Bahan> mBahans;
 
 
     protected Makanan(Parcel in) {
-        produk = in.readString();
-        qty = in.readInt();
-        done = in.readByte() != 0;
-        bahans = in.createTypedArrayList(Bahan.CREATOR);
+        mProduk = in.readString();
+        mQty = in.readInt();
+        mDone = in.readByte() != 0;
+        mBahans = in.createTypedArrayList(Bahan.CREATOR);
     }
 
     public static final Creator<Makanan> CREATOR = new Creator<Makanan>() {
@@ -36,32 +34,31 @@ public class Makanan implements Parcelable {
         }
     };
 
-    public List<Bahan> getBahans() {
-        return bahans;
+    public List<Bahan> getmBahans() {
+        return mBahans;
     }
 
-    public boolean isDone() {
-        return done;
+    public boolean ismDone() {
+        return mDone;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setmDone(boolean mDone) {
+        this.mDone = mDone;
     }
 
     public Makanan(String produk, int qty, List<Bahan> bahans) {
-        this.produk = produk;
-        this.qty = qty;
-        this.bahans = bahans;
+        this.mProduk = produk;
+        this.mQty = qty;
+        this.mBahans = bahans;
     }
 
 
-
-    public String getProduk() {
-        return produk;
+    public String getmProduk() {
+        return mProduk;
     }
 
-    public int getQty() {
-        return qty;
+    public int getmQty() {
+        return mQty;
     }
 
 
@@ -72,9 +69,9 @@ public class Makanan implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(produk);
-        parcel.writeInt(qty);
-        parcel.writeByte((byte) (done ? 1 : 0));
-        parcel.writeTypedList(bahans);
+        parcel.writeString(mProduk);
+        parcel.writeInt(mQty);
+        parcel.writeByte((byte) (mDone ? 1 : 0));
+        parcel.writeTypedList(mBahans);
     }
 }

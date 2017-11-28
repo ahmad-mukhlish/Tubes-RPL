@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Order;
-import com.geeksquad.android.tubes.networking.udacity.OrderLoader;
+import com.geeksquad.android.tubes.networking.OrderLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,15 +32,18 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Order>> {
+
+    private final String LOG_TAG = MainActivity.class.getName();
+
+    public static List<Order> mOrders = null;
+
     private static final int LOADER_ID = 54;
     private OrderRecycleAdapter mOrderRecycleAdapter;
-    public static List<Order> mOrders = null;
     private RecyclerView mRecyclerView;
     private ActionBar mActionBar;
     private LinearLayout mLoading;
     private ru.shmakinv.android.widget.material.searchview.SearchView mSearchView;
     private SwipeRefreshLayout mSwipe;
-    private LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mActionBar.hide();
 
         if (isConnected) {
-            mLoaderManager = getLoaderManager();
+            LoaderManager mLoaderManager = getLoaderManager();
             mLoaderManager.initLoader(LOADER_ID, null, this);
         } else {
             error.setVisibility(View.VISIBLE);
@@ -83,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSearchView.setOnQueryTextListener(new ru.shmakinv.android.widget.material.searchview.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(@NonNull String query) {
-                List<Order> selectedOrders = new ArrayList<Order>();
+                List<Order> selectedOrders = new ArrayList<>();
                 for (Order currentOrder : mOrders) {
-                    if ((currentOrder.getMeja() + "").toLowerCase().contains(query.toLowerCase())) {
+                    if ((currentOrder.getmMeja() + "").toLowerCase().contains(query.toLowerCase())) {
                         selectedOrders.add(currentOrder);
                     }
                 }
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         TextView tanggal = (TextView) findViewById(R.id.tanggal);
-        tanggal.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("id")).format(Calendar.getInstance().getTime()));
+        tanggal.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("en")).format(Calendar.getInstance().getTime()));
     }
 
 
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Sudah menu utama, tidak bisa kembali lagi..", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.main_menu), Toast.LENGTH_SHORT).show();
     }
 
 }

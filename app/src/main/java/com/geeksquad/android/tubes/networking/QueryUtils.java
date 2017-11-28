@@ -1,4 +1,4 @@
-package com.geeksquad.android.tubes.networking.udacity;
+package com.geeksquad.android.tubes.networking;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,10 +21,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by GOODWARE1 on 8/30/2017.
- */
 
 final class QueryUtils {
 
@@ -169,7 +165,7 @@ final class QueryUtils {
 
 
         } catch (JSONException e) {
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing  JSON results", e);
         }
 
         return listOrders;

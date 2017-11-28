@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="10dp"
-            android:hint="Username"
+            android:hint="@string/user"
             android:inputType="text"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
@@ -53,7 +53,7 @@
             android:id="@+id/edPassword"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/pass"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />

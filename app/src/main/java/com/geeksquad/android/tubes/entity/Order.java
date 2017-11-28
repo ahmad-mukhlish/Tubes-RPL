@@ -2,12 +2,10 @@ package com.geeksquad.android.tubes.entity;
 
 import java.util.List;
 
-/**
- * Created by ASUS on 25/10/2017.
- */
 
 public class Order {
 
+    private final String LOG_TAG = Order.class.getName();
 
     public static String USERNAME = "admin";
     public static String PASSWORD = "jasuke";
@@ -16,41 +14,41 @@ public class Order {
     public static final String JSON_REPLY_KOKI = "server.php?operasi=rincian_koki";
 
 
-    private int meja, items;
-    private String tanggal, catatan;
-    private List<Makanan> listmakanan;
+    private int mMeja, mItems;
+    private String mTanggal, mCatatan;
+    private List<Makanan> mListMakanan;
 
 
     public Order(int meja, String tanggal, String keterangan, int items, List<Makanan> listmakanan) {
-        this.meja = meja;
-        this.tanggal = tanggal;
-        this.catatan = keterangan;
-        this.items = items;
-        this.listmakanan = listmakanan;
+        this.mMeja = meja;
+        this.mTanggal = tanggal;
+        this.mCatatan = keterangan;
+        this.mItems = items;
+        this.mListMakanan = listmakanan;
     }
 
-    public int getMeja() {
-        return meja;
-    }
-
-
-    public String getTanggal() {
-        return tanggal;
+    public int getmMeja() {
+        return mMeja;
     }
 
 
-    public String getCatatan() {
-        return catatan;
+    public String getmTanggal() {
+        return mTanggal;
     }
 
 
-    public int getItems() {
-        return items;
+    public String getmCatatan() {
+        return mCatatan;
+    }
+
+
+    public int getmItems() {
+        return mItems;
     }
 
 
     public List<Makanan> getListmakanan() {
-        return listmakanan;
+        return mListMakanan;
     }
 
 

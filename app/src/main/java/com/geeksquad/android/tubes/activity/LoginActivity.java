@@ -14,9 +14,11 @@ import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.entity.Order;
 
 public class LoginActivity extends Activity {
-    public EditText edUser;
-    public EditText edPass;
-    public Button login;
+
+    private final String LOG_TAG = LoginActivity.class.getName();
+
+    public EditText mEdUser, mEdPass;
+    public Button mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +26,21 @@ public class LoginActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_login);
-        edUser = findViewById(R.id.edUsername);
-        edPass = findViewById(R.id.edPassword);
-        login = findViewById(R.id.login);
-
+        mEdUser = findViewById(R.id.edUsername);
+        mEdPass = findViewById(R.id.edPassword);
+        mLogin = findViewById(R.id.login);
     }
 
     public void login(View v) {
-        String stuser = edUser.getText().toString();
-        String stpass = edPass.getText().toString();
+        String stuser = mEdUser.getText().toString();
+        String stpass = mEdPass.getText().toString();
 
         if (stuser.equals(Order.USERNAME) && stpass.equals(Order.PASSWORD)) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish() ;
+            finish();
         } else {
-            Toast.makeText(this, "Username atau password tidak sesuai", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show();
         }
 
     }

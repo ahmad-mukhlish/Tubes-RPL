@@ -3,24 +3,23 @@ package com.geeksquad.android.tubes.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by GOODWARE1 on 11/21/2017.
- */
 
 public class Bahan implements Parcelable {
 
-    private String nama_bahan;
-    private int jumlah_bahan;
+    private final String LOG_TAG = Bahan.class.getName();
+
+    private String mNamaBahan;
+    private int mJumlahBahan;
 
     public Bahan(String nama_bahan, int jumlah_bahan) {
-        this.nama_bahan = nama_bahan;
-        this.jumlah_bahan = jumlah_bahan;
+        this.mNamaBahan = nama_bahan;
+        this.mJumlahBahan = jumlah_bahan;
     }
 
 
     protected Bahan(Parcel in) {
-        nama_bahan = in.readString();
-        jumlah_bahan = in.readInt();
+        mNamaBahan = in.readString();
+        mJumlahBahan = in.readInt();
     }
 
     public static final Creator<Bahan> CREATOR = new Creator<Bahan>() {
@@ -35,21 +34,14 @@ public class Bahan implements Parcelable {
         }
     };
 
-    public String getNama_bahan() {
-        return nama_bahan;
+    public String getmNamaBahan() {
+        return mNamaBahan;
     }
 
-    public void setNama_bahan(String nama_bahan) {
-        this.nama_bahan = nama_bahan;
+    public int getmJumlahBahan() {
+        return mJumlahBahan;
     }
 
-    public int getJumlah_bahan() {
-        return jumlah_bahan;
-    }
-
-    public void setJumlah_bahan(int jumlah_bahan) {
-        this.jumlah_bahan = jumlah_bahan;
-    }
 
     @Override
     public int describeContents() {
@@ -58,7 +50,7 @@ public class Bahan implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(nama_bahan);
-        parcel.writeInt(jumlah_bahan);
+        parcel.writeString(mNamaBahan);
+        parcel.writeInt(mJumlahBahan);
     }
 }

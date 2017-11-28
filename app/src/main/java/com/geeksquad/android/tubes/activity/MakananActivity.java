@@ -23,9 +23,11 @@ import java.util.List;
 
 public class MakananActivity extends AppCompatActivity {
 
-    List<Makanan> mMakanans;
-    int mItems;
-    Bundle mBundle;
+    private final String LOG_TAG = MakananActivity.class.getName();
+
+    private List<Makanan> mMakanans;
+    private int mItems;
+    private Bundle mBundle;
 
 
     @Override
@@ -52,8 +54,7 @@ public class MakananActivity extends AppCompatActivity {
         Button done = (Button) findViewById(R.id.done);
         done.setOnClickListener(new doneListener(this));
 
-        setTitle("Pesanan Meja " + mBundle.getInt("no_meja"));
-
+        setTitle(getString(R.string.order_table) + " " + mBundle.getInt("no_meja"));
 
     }
 
@@ -61,7 +62,7 @@ public class MakananActivity extends AppCompatActivity {
 
         private Context mContext;
 
-        public doneListener(Context mContext) {
+        doneListener(Context mContext) {
             this.mContext = mContext;
         }
 
@@ -71,7 +72,7 @@ public class MakananActivity extends AppCompatActivity {
 
             for (Makanan makananNow : mMakanans) {
 
-                if (makananNow.isDone()) {
+                if (makananNow.ismDone()) {
                     checkDetail++;
                 }
 
@@ -88,7 +89,7 @@ public class MakananActivity extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(mContext, "Ada item yang belum selesai...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.undone, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -103,32 +104,35 @@ public class MakananActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-
-            case R.id.note:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                View rootDialog = LayoutInflater.from(this).inflate(R.layout.dialogue_keterangan, null);
-                TextView keterangan = rootDialog.findViewById(R.id.keterangan);
-                keterangan.setText(mBundle.getString("keterangan"));
-
-                builder.setView(rootDialog);
-                final AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-                TextView ok = rootDialog.findViewById(R.id.ok);
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-                break;
+        if (item.getItemId() == R.id.note) {
+            dialogueKeterangan();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void dialogueKeterangan() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View rootDialog = LayoutInflater.from(this).inflate(R.layout.dialogue_keterangan, null);
+        TextView keterangan = rootDialog.findViewById(R.id.keterangan);
+        keterangan.setText(mBundle.getString("keterangan"));
+
+        builder.setView(rootDialog);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        TextView ok = rootDialog.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
 
 }

@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Ingredient"
+                android:text="@string/ingredient"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Grams"
+                android:text="@string/grams"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
