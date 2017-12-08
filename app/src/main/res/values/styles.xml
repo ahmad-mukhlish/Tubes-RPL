@@ -22,14 +22,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarStyle">@style/NoShadowAppBarStyle</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <!-- App bar style -->
-    <style name="NoShadowAppBarStyle" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <!-- Remove the shadow below the app bar -->
-        <item name="elevation">0dp</item>
-    </style>
 
 </resources>
