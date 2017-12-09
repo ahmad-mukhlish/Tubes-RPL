@@ -17,15 +17,17 @@ public class LoginActivity extends Activity {
 
     private final String LOG_TAG = LoginActivity.class.getName();
 
-    public EditText mEdUser, mEdPass;
-    public Button mLogin;
+    private EditText mEdUser, mEdPass;
+    private Button mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_login);
+
         mEdUser = findViewById(R.id.edUsername);
         mEdPass = findViewById(R.id.edPassword);
         mLogin = findViewById(R.id.login);
@@ -40,7 +42,7 @@ public class LoginActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_password_mismatch), Toast.LENGTH_SHORT).show();
         }
 
     }

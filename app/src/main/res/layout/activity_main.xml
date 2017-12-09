@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ToolBarStyle"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:subtitleTextColor="#FFFFFF"
+        app:titleTextColor="#FFFFFF" />
 
     <LinearLayout
 
@@ -26,7 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_internet_connection"
+            android:text="@string/label_no_internet_connection"
             android:textAllCaps="true"
             android:textSize="16sp" />
     </LinearLayout>
@@ -42,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/app_name"
+            android:text="@string/label_app_name"
             android:textColor="@color/colorAccent"
             android:textSize="40sp" />
 
@@ -65,7 +81,6 @@
             android:indeterminateOnly="true"
             android:max="100" />
 
-
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -73,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -82,13 +97,23 @@
                 android:id="@+id/tanggal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:background="@color/colorPrimary"
-                android:gravity="center"
                 android:paddingBottom="10dp"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 tool:text="Pesanan Rabu, 15 Desember 2017" />
 
+
+            <TextView
+                android:id="@+id/no_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/label_no_food"
+                android:textAlignment="center"
+                android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rvOrder"
@@ -96,11 +121,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-
-        </LinearLayout>
-
-
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
 </LinearLayout>

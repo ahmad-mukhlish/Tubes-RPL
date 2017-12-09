@@ -25,7 +25,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    //TODO TRY THIS WHEN THERE IS AN INTERNET CONNECTION
+
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -36,5 +36,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.github.VyacheslavShmakin:material-searchview:1.1.2'
+    compile 'com.mikepenz:materialdrawer:6.0.2'
     testCompile 'junit:junit:4.12'
 }

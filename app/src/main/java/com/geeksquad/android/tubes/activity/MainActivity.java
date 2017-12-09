@@ -9,13 +9,17 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,11 @@ import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Order;
 import com.geeksquad.android.tubes.networking.OrderLoader;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,10 +49,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int LOADER_ID = 54;
     private OrderRecycleAdapter mOrderRecycleAdapter;
     private RecyclerView mRecyclerView;
-    private ActionBar mActionBar;
+    private Toolbar mToolBar;
     private LinearLayout mLoading;
     private ru.shmakinv.android.widget.material.searchview.SearchView mSearchView;
     private SwipeRefreshLayout mSwipe;
+    private Drawer mDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         error.setVisibility(View.GONE);
 
-
-        mActionBar = getSupportActionBar();
-        mActionBar.hide();
 
         if (isConnected) {
             LoaderManager mLoaderManager = getLoaderManager();
@@ -106,14 +114,90 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mOrderRecycleAdapter.setFilter(mOrders);
+                if (!mOrders.isEmpty())
+                    mOrderRecycleAdapter.setFilter(mOrders);
                 mSwipe.setRefreshing(false);
+
             }
         });
 
 
         TextView tanggal = (TextView) findViewById(R.id.tanggal);
         tanggal.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("en")).format(Calendar.getInstance().getTime()));
+
+        mToolBar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mToolBar);
+        mToolBar.setVisibility(View.GONE);
+
+        initNavigationDrawer(savedInstanceState);
+
+
+    }
+
+    private void initNavigationDrawer(Bundle savedInstanceState) {
+
+        PrimaryDrawerItem aboutUs = new PrimaryDrawerItem().
+                withIdentifier(1).
+                withName(R.string.drawer_about_us)
+                .withIcon(R.mipmap.about_us);
+
+
+        mDrawer = new DrawerBuilder()
+                .withActivity(this)
+                .withHeader(R.layout.drawer_header)
+                .withDrawerGravity(Gravity.LEFT)
+                .withSavedInstance(savedInstanceState)
+                .withToolbar(mToolBar)
+                .withSelectedItem(-1)
+                .addDrawerItems(aboutUs, new DividerDrawerItem()
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+
+                            case 1: {
+                                //TODO ADD ABOUT US HERE
+                                break;
+                            }
+
+
+                        }
+
+                        return true;
+                    }
+                })
+                .build();
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+
+
+    }
+
+    public void dialogueMore(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View rootDialog = LayoutInflater.from(this).inflate(R.layout.dialogue_more, null);
+
+        Button logout = rootDialog.findViewById(R.id.btn_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.closeDrawer();
+                mOrders = null;
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getBaseContext(), R.string.toast_logout, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        builder.setView(rootDialog);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+
     }
 
 
@@ -137,10 +221,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void updateUI(List<Order> orderList) {
-        mActionBar.show();
+        mToolBar.setVisibility(View.VISIBLE);
         mLoading.setVisibility(View.GONE);
-        mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
-        mRecyclerView.setAdapter(mOrderRecycleAdapter);
+
+        if (!orderList.isEmpty()) {
+            mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
+            mRecyclerView.setAdapter(mOrderRecycleAdapter);
+        } else {
+            TextView textView = (TextView) findViewById(R.id.no_food);
+            textView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -159,12 +251,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mSearchView.onOptionsItemSelected(getFragmentManager(), item);
                 break;
 
-            case R.id.logout:
-                mOrders = null;
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -179,7 +265,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, getString(R.string.main_menu), Toast.LENGTH_SHORT).show();
+        if (mDrawer.isDrawerOpen())
+            mDrawer.closeDrawer();
+        else
+            Toast.makeText(this, R.string.toast_main_menu, Toast.LENGTH_SHORT).show();
     }
 
 }

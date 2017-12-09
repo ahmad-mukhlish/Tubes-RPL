@@ -42,7 +42,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
     @Override
     public void onBindViewHolder(OrderViewHolder holder, int position) {
         Order orderNow = mOrders.get(position);
-        holder.mNoTable.setText(mContext.getString(R.string.table) + " " + orderNow.getmMeja());
+        holder.mNoTable.setText(mContext.getString(R.string.label_table) + " " + orderNow.getmMeja());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
         holder.mDateOrder.setText(getFormattedDate(orderNow.getmTanggal(), df));
@@ -98,7 +98,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
                 intent.putExtra("makanan", (ArrayList<Makanan>) clickedOrder.getListmakanan());
                 view.getContext().startActivity(intent);
             } else {
-                Toast.makeText(view.getContext(), R.string.up, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), R.string.toast_up, Toast.LENGTH_SHORT).show();
 
             }
         }

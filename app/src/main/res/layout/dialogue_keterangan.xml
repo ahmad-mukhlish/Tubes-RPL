@@ -37,7 +37,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="50dp"
         android:background="@color/colorPrimary"
-        android:text="@string/ok"
+        android:text="@string/button_ok"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 

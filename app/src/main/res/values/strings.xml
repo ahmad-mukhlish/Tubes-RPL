@@ -1,28 +1,49 @@
 <resources>
-    <string name="app_name">Mr. Broto Chef </string>
-    <string name="done">Done</string>
-    <string name="done_all">Done All</string>
-    <string name="qty">Qty</string>
-    <string name="item_name">Item Name</string>
-    <string name="login">login</string>
-    <string name="version">Chef ver.</string>
-    <string name="no_internet_connection">No Internet Connection..</string>
-    <string name="password_mismatch">Username or password is incorrect</string>
-    <string name="main_menu">You have reached the main menu..</string>
-    <string name="logout">Logout success..</string>
-    <string name="ok">OK</string>
-    <string name="log_out_menu">Log out</string>
-    <string name="order_table">Order table </string>
-    <string name="undone">Unfinished item(s)..</string>
-    <string name="table">Table  </string>
-    <string name="up">Please finish the first order..</string>
-    <string name="user">Username</string>
-    <string name="pass">Password</string>
-    <string name="ingredient">Ingredient</string>
-    <string name="grams">Grams</string>
-    <string name="note">Note</string>
-    <string name="search">Search</string>
-    <string name="logout_menu">Logout</string>
+
+    <!--toasts-->
+    <string name="toast_password_mismatch">Username or password is incorrect</string>
+    <string name="toast_main_menu">You have reached the main menu..</string>
+    <string name="toast_logout">Logout success..</string>
+    <string name="toast_undone">Unfinished item(s)..</string>
+    <string name="toast_up">Please finish the first order..</string>
+
+
+    <!--labels-->
+    <string name="label_app_name">Mr. Broto Chef </string>
+    <string name="label_version">Chef ver.</string>
+    <string name="label_no_internet_connection">No Internet Connection..</string>
+    <string name="label_item_name">Item Name</string>
+    <string name="label_qty">Qty</string>
+    <string name="label_done">Done</string>
+    <string name="label_ingredient">Ingredient</string>
+    <string name="label_table">Table</string>
+    <string name="label_grams">Grams</string>
+
+
+    <!--hints-->
+    <string name="hint_user">Username</string>
+    <string name="hint_pass">Password</string>
+
+    <!--buttons-->
+    <string name="button_login">login</string>
+    <string name="button_done_all">Done All</string>
+    <string name="button_ok">OK</string>
+    <string name="button_logout">Logout</string>
+
+
+    <!--menus-->
+    <string name="menu_note">Note</string>
+    <string name="menu_search">Search</string>
+
+
+    <!--titles-->
+    <string name="order_table">Order table</string>
+
+
+    <!--drawers-->
+    <string name="drawer_developed_by">Developed by Jasuke Squad</string>
+    <string name="drawer_about_us">About Us</string>
+    <string name="label_no_food">No food has been ordered yet</string>
 </resources>
 
 
