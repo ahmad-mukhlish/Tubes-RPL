@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ru.shmakinv.android.widget.material.searchview.SearchView mSearchView;
     private SwipeRefreshLayout mSwipe;
     private Drawer mDrawer;
+    private LoaderManager mLoaderManager;
 
 
     @Override
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         if (isConnected) {
-            LoaderManager mLoaderManager = getLoaderManager();
+            mLoaderManager = getLoaderManager();
             mLoaderManager.initLoader(LOADER_ID, null, this);
         } else {
             error.setVisibility(View.VISIBLE);
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onRefresh() {
                 if (!mOrders.isEmpty())
                     mOrderRecycleAdapter.setFilter(mOrders);
+                mLoaderManager.initLoader(LOADER_ID, null, MainActivity.this);
                 mSwipe.setRefreshing(false);
 
             }
@@ -228,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
             mRecyclerView.setAdapter(mOrderRecycleAdapter);
         } else {
-            TextView textView = (TextView) findViewById(R.id.no_food);
-            textView.setVisibility(View.VISIBLE);
+            View view = findViewById(R.id.no_food);
+            view.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }
 
