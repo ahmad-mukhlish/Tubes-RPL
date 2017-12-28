@@ -10,7 +10,7 @@ public class Order {
     public static String USERNAME = "admin";
     public static String PASSWORD = "jasuke";
 
-    public static final String BASE_PATH = "http://192.168.1.3/restoran/";
+    public static final String BASE_PATH = "http://192.168.1.9/restoran/";
     public static final String JSON_REPLY_KOKI = "server.php?operasi=rincian_koki";
 
 
