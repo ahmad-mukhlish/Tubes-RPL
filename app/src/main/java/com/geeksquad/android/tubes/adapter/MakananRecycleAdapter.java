@@ -39,12 +39,7 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
         final Makanan currentMakanan = mMakanans.get(position);
         holder.mJudul.setText(currentMakanan.getmProduk());
         holder.mQty.setText(currentMakanan.getmQty() + "");
-        holder.mCheckDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentMakanan.setmDone(holder.mCheckDone.isChecked());
-            }
-        });
+
 
         if (position % 2 != 0) {
             holder.mItemView.setBackgroundColor(Color.rgb(255, 255, 255));
@@ -63,14 +58,12 @@ public class MakananRecycleAdapter extends RecyclerView.Adapter<MakananRecycleAd
 
         TextView mJudul, mQty;
         View mItemView;
-        CheckBox mCheckDone;
 
 
         OrderViewHolder(View itemView) {
             super(itemView);
             mJudul = itemView.findViewById(R.id.judul);
             mQty = itemView.findViewById(R.id.qty);
-            mCheckDone = itemView.findViewById(R.id.check_done);
             mItemView = itemView;
         }
 

@@ -2,6 +2,7 @@ package com.geeksquad.android.tubes.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.MakananRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Makanan;
+import com.geeksquad.android.tubes.entity.Order;
+import com.geeksquad.android.tubes.networking.QueryUtils;
 
 import java.util.List;
 
@@ -25,8 +28,6 @@ public class MakananActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MakananActivity.class.getName();
 
-    private List<Makanan> mMakanans;
-    private int mItems;
     private Bundle mBundle;
 
 
@@ -36,12 +37,11 @@ public class MakananActivity extends AppCompatActivity {
         setContentView(R.layout.activity_makanan);
 
         mBundle = getIntent().getExtras();
-        mMakanans = mBundle.getParcelableArrayList("makanan");
-        mItems = mBundle.getInt("items");
+        List<Makanan> makanans = mBundle.getParcelableArrayList("makanan");
 
 
         MakananRecycleAdapter makananRecycleAdapter =
-                new MakananRecycleAdapter(this, mMakanans);
+                new MakananRecycleAdapter(this, makanans);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvMakanan);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -54,7 +54,7 @@ public class MakananActivity extends AppCompatActivity {
         Button done = (Button) findViewById(R.id.done);
         done.setOnClickListener(new doneListener(this));
 
-        setTitle(getString(R.string.order_table) + " " + mBundle.getInt("no_meja"));
+        setTitle(getString(R.string.order_table) + " " + mBundle.getInt("noMeja"));
 
     }
 
@@ -68,33 +68,41 @@ public class MakananActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            int checkDetail = 0;
 
-            for (Makanan makananNow : mMakanans) {
-
-                if (makananNow.ismDone()) {
-                    checkDetail++;
-                }
-
-            }
-
-            if (checkDetail == mItems) {
-
-                //TODO make database delete stuff here via retrofit before intent back to MainActivity
-                //TODO make notif to waiter
-
-
-                startActivity(new Intent(mContext, MainActivity.class));
-
-
-            } else {
-
-                Toast.makeText(mContext, R.string.toast_undone, Toast.LENGTH_SHORT).show();
-
-            }
+           int kodePesanan = mBundle.getInt("kodePesanan") ;
+           new ConfirmCookedAsyncTask(getBaseContext()).execute(Order.BASE_PATH + Order.JSON_CONFIRM + kodePesanan);
 
         }
     }
+
+    private class ConfirmCookedAsyncTask extends AsyncTask<String, Void, String> {
+
+        private Context mContext;
+
+        ConfirmCookedAsyncTask(Context mContext) {
+            this.mContext = mContext;
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+            QueryUtils.fetchResponse(urls[0]);
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(mContext, R.string.toast_confirm, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(mContext, MainActivity.class));
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

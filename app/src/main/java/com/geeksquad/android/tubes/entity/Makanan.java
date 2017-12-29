@@ -11,14 +11,12 @@ public class Makanan implements Parcelable {
 
     private String mProduk;
     private int mQty;
-    private boolean mDone = false;
     private List<Bahan> mBahans;
 
 
     protected Makanan(Parcel in) {
         mProduk = in.readString();
         mQty = in.readInt();
-        mDone = in.readByte() != 0;
         mBahans = in.createTypedArrayList(Bahan.CREATOR);
     }
 
@@ -38,13 +36,7 @@ public class Makanan implements Parcelable {
         return mBahans;
     }
 
-    public boolean ismDone() {
-        return mDone;
-    }
 
-    public void setmDone(boolean mDone) {
-        this.mDone = mDone;
-    }
 
     public Makanan(String produk, int qty, List<Bahan> bahans) {
         this.mProduk = produk;
@@ -71,7 +63,6 @@ public class Makanan implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(mProduk);
         parcel.writeInt(mQty);
-        parcel.writeByte((byte) (mDone ? 1 : 0));
         parcel.writeTypedList(mBahans);
     }
 }

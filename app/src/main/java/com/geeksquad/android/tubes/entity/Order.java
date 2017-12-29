@@ -10,21 +10,23 @@ public class Order {
     public static String USERNAME = "admin";
     public static String PASSWORD = "jasuke";
 
-    public static final String BASE_PATH = "http://192.168.1.9/restoran/";
+    public static final String BASE_PATH = "http://192.168.1.3/restoran/";
     public static final String JSON_REPLY_KOKI = "server.php?operasi=rincian_koki";
+    public static final String JSON_CONFIRM = "server.php?operasi=konfirmasi_masak&kode_pesanan=";
 
 
-    private int mMeja, mItems;
+    private int mMeja, mItems, mKodePesanan;
     private String mTanggal, mCatatan;
     private List<Makanan> mListMakanan;
 
 
-    public Order(int meja, String tanggal, String keterangan, int items, List<Makanan> listmakanan) {
-        this.mMeja = meja;
-        this.mTanggal = tanggal;
-        this.mCatatan = keterangan;
-        this.mItems = items;
-        this.mListMakanan = listmakanan;
+    public Order(int mMeja, int mItems, int mKodePesanan, String mTanggal, String mCatatan, List<Makanan> mListMakanan) {
+        this.mMeja = mMeja;
+        this.mItems = mItems;
+        this.mKodePesanan = mKodePesanan;
+        this.mTanggal = mTanggal;
+        this.mCatatan = mCatatan;
+        this.mListMakanan = mListMakanan;
     }
 
     public int getmMeja() {
@@ -52,4 +54,7 @@ public class Order {
     }
 
 
+    public int getmKodePesanan() {
+        return mKodePesanan;
+    }
 }

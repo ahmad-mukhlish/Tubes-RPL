@@ -91,9 +91,9 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
             if (mPosition == 0) {
                 Order clickedOrder = mOrders.get(mPosition);
                 Intent intent = new Intent(mContext, MakananActivity.class);
-                intent.putExtra("no_meja", clickedOrder.getmMeja());
+                intent.putExtra("noMeja", clickedOrder.getmMeja());
+                intent.putExtra("kodePesanan", clickedOrder.getmKodePesanan()) ;
                 intent.putExtra("tanggal", clickedOrder.getmTanggal());
-                intent.putExtra("items", clickedOrder.getmItems());
                 intent.putExtra("keterangan", clickedOrder.getmCatatan());
                 intent.putExtra("makanan", (ArrayList<Makanan>) clickedOrder.getListmakanan());
                 view.getContext().startActivity(intent);

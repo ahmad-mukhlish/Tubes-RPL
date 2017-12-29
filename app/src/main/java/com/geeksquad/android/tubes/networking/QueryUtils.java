@@ -22,7 +22,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-final class QueryUtils {
+public final class QueryUtils {
 
 
     private static final String LOG_TAG = QueryUtils.class.getName();
@@ -30,6 +30,19 @@ final class QueryUtils {
     private QueryUtils() {
     }
 
+    public static String fetchResponse(String link) {
+
+        URL url = parseStringLinkToURL(link);
+
+        String jsonResponse = null;
+        try {
+            jsonResponse = httpConnectRequestJson(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error when closing input stream", e);
+        }
+
+        return jsonResponse;
+    }
 
     static List<Order> fetchData(String link) {
 
@@ -133,7 +146,8 @@ final class QueryUtils {
             for (int i = 0; i < root.length(); i++) {
 
                 JSONObject orderNow = root.getJSONObject(i);
-                int no_meja = orderNow.getInt("meja");
+                int noMeja = orderNow.getInt("meja");
+                int kodePesanan = orderNow.getInt("kode_pesanan");
                 String tanggal = orderNow.getString("tanggal");
                 String keterangan = orderNow.getString("catatan");
                 JSONArray listmakanan = orderNow.getJSONArray("listmakanan");
@@ -155,12 +169,11 @@ final class QueryUtils {
                     }
 
 
-
                     makanans.add(new Makanan(produk, qty, bahans));
                 }
 
 
-                listOrders.add(new Order(no_meja, tanggal, keterangan, listmakanan.length(), makanans));
+                listOrders.add(new Order(noMeja, listmakanan.length(), kodePesanan, tanggal, keterangan, makanans));
             }
 
 
