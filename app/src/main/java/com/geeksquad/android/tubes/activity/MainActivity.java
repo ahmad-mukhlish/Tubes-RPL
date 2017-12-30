@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -28,7 +25,6 @@ import android.widget.Toast;
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Order;
-
 import com.geeksquad.android.tubes.networking.QueryUtils;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -37,7 +33,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -49,12 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static List<Order> mOrders = null;
 
-    private static final int LOADER_ID = 54;
-    private OrderRecycleAdapter mOrderRecycleAdapter;
     private RecyclerView mRecyclerView;
     private Toolbar mToolBar;
     private LinearLayout mLoading;
-    private ru.shmakinv.android.widget.material.searchview.SearchView mSearchView;
     private SwipeRefreshLayout mSwipe;
     private Drawer mDrawer;
     private View mNoFood;
@@ -93,28 +85,6 @@ public class MainActivity extends AppCompatActivity {
             error.setVisibility(View.VISIBLE);
         }
 
-        mSearchView = ru.shmakinv.android.widget.material.searchview.SearchView.getInstance(this);
-        mSearchView.setSuggestionAdapter(mOrderRecycleAdapter);
-        mSearchView.setOnQueryTextListener(new ru.shmakinv.android.widget.material.searchview.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(@NonNull String query) {
-                List<Order> selectedOrders = new ArrayList<>();
-                for (Order currentOrder : mOrders) {
-                    if ((currentOrder.getmMeja() + "").toLowerCase().contains(query.toLowerCase())) {
-                        selectedOrders.add(currentOrder);
-                    }
-                }
-
-                mOrderRecycleAdapter.setFilter(selectedOrders);
-                return true;
-            }
-
-            @Override
-            public void onQueryTextChanged(@NonNull String newText) {
-
-            }
-        });
-
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -128,7 +98,12 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mToolBar.setVisibility(View.GONE);
+
+        TextView title = mToolBar.findViewById(R.id.toolbar_title);
+        title.setText("Mr. Broto Chef");
+
 
         initNavigationDrawer(savedInstanceState);
         mNoFood = findViewById(R.id.no_food);
@@ -159,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawer = new DrawerBuilder()
                 .withActivity(this)
                 .withHeader(R.layout.drawer_header)
-                .withDrawerGravity(Gravity.LEFT)
+                .withDrawerGravity(Gravity.START)
                 .withSavedInstance(savedInstanceState)
                 .withToolbar(mToolBar)
                 .withSelectedItem(-1)
@@ -244,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
         mToolBar.setVisibility(View.VISIBLE);
         mLoading.setVisibility(View.GONE);
 
-        mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
+        OrderRecycleAdapter mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
         mRecyclerView.setAdapter(mOrderRecycleAdapter);
         mRecyclerView.setVisibility(View.VISIBLE);
         mNoFood.setVisibility(View.GONE);
@@ -260,25 +235,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-
-            case R.id.search:
-                mSearchView.onOptionsItemSelected(getFragmentManager(), item);
-                break;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onDestroy() {

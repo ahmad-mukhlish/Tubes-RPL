@@ -69,12 +69,7 @@ public class OrderRecycleAdapter extends RecyclerView.Adapter<OrderRecycleAdapte
         }
     }
 
-    public void setFilter(List<Order> selectedFilms) {
 
-        mOrders = new ArrayList<>();
-        mOrders.addAll(selectedFilms);
-        notifyDataSetChanged();
-    }
 
     private class DetailListener implements View.OnClickListener {
 

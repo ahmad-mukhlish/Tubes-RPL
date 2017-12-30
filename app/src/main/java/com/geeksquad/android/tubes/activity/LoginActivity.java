@@ -18,7 +18,6 @@ public class LoginActivity extends Activity {
     private final String LOG_TAG = LoginActivity.class.getName();
 
     private EditText mEdUser, mEdPass;
-    private Button mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class LoginActivity extends Activity {
 
         mEdUser = findViewById(R.id.edUsername);
         mEdPass = findViewById(R.id.edPassword);
-        mLogin = findViewById(R.id.login);
+        Button login = findViewById(R.id.login);
     }
 
     public void login(View v) {

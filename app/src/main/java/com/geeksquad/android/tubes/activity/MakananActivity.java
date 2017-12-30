@@ -70,7 +70,7 @@ public class MakananActivity extends AppCompatActivity {
         public void onClick(View view) {
 
            int kodePesanan = mBundle.getInt("kodePesanan") ;
-           new ConfirmCookedAsyncTask(getBaseContext()).execute(Order.BASE_PATH + Order.JSON_CONFIRM + kodePesanan);
+           new ConfirmCookedAsyncTask(mContext).execute(Order.BASE_PATH + Order.JSON_CONFIRM + kodePesanan);
 
         }
     }
