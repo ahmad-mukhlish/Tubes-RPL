@@ -44,7 +44,7 @@ public final class QueryUtils {
         return jsonResponse;
     }
 
-    static List<Order> fetchData(String link) {
+    public static List<Order> fetchData(String link) {
 
         URL url = parseStringLinkToURL(link);
 

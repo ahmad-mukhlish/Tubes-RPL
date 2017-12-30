@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +29,8 @@ import android.widget.Toast;
 import com.geeksquad.android.tubes.R;
 import com.geeksquad.android.tubes.adapter.OrderRecycleAdapter;
 import com.geeksquad.android.tubes.entity.Order;
-import com.geeksquad.android.tubes.networking.OrderLoader;
+
+import com.geeksquad.android.tubes.networking.QueryUtils;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -40,7 +43,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Order>> {
+
+public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getName();
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ru.shmakinv.android.widget.material.searchview.SearchView mSearchView;
     private SwipeRefreshLayout mSwipe;
     private Drawer mDrawer;
-    private LoaderManager mLoaderManager;
+    private View mNoFood;
 
 
     @Override
@@ -84,8 +88,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         if (isConnected) {
-            mLoaderManager = getLoaderManager();
-            mLoaderManager.initLoader(LOADER_ID, null, this);
+            new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
         } else {
             error.setVisibility(View.VISIBLE);
         }
@@ -115,11 +118,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (!mOrders.isEmpty())
-                    mOrderRecycleAdapter.setFilter(mOrders);
-                mLoaderManager.initLoader(LOADER_ID, null, MainActivity.this);
-                mSwipe.setRefreshing(false);
-
+                new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
             }
         });
 
@@ -132,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mToolBar.setVisibility(View.GONE);
 
         initNavigationDrawer(savedInstanceState);
+        mNoFood = findViewById(R.id.no_food);
 
 
     }
@@ -203,35 +203,45 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-    @Override
-    public Loader<List<Order>> onCreateLoader(int i, Bundle bundle) {
-        return new OrderLoader(this, Order.BASE_PATH + Order.JSON_REPLY_KOKI);
+    public class OrderAsyncTask extends AsyncTask<String, Void, List<Order>> {
 
-    }
 
-    @Override
-    public void onLoadFinished(Loader<List<Order>> loader, List<Order> orders) {
-        if (mOrders == null || mOrders.isEmpty()) {
-            mOrders = orders;
-            updateUI(mOrders);
+        OrderAsyncTask() {
         }
 
+
+        @Override
+        protected List<Order> doInBackground(String... urls) {
+
+            if (urls[0] == null || urls.length < 1)
+                return null;
+
+            return QueryUtils.fetchData(urls[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Order> orders) {
+            super.onPostExecute(orders);
+            updateUI(orders);
+            mSwipe.setRefreshing(false);
+        }
     }
 
-    @Override
-    public void onLoaderReset(Loader<List<Order>> loader) {
-    }
 
     public void updateUI(List<Order> orderList) {
         mToolBar.setVisibility(View.VISIBLE);
         mLoading.setVisibility(View.GONE);
 
-        if (!orderList.isEmpty()) {
-            mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
-            mRecyclerView.setAdapter(mOrderRecycleAdapter);
-        } else {
-            View view = findViewById(R.id.no_food);
-            view.setVisibility(View.VISIBLE);
+        mOrderRecycleAdapter = new OrderRecycleAdapter(this, orderList);
+        mRecyclerView.setAdapter(mOrderRecycleAdapter);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mNoFood.setVisibility(View.GONE);
+
+        Log.v("cik", orderList.size() + "");
+        if (orderList.size() < 1) {
+
+
+            mNoFood.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }
 
