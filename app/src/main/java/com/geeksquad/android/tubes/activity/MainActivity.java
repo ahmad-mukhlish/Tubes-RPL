@@ -1,13 +1,12 @@
 package com.geeksquad.android.tubes.activity;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout mSwipe;
     private Drawer mDrawer;
     private View mNoFood;
+    private Handler mHandler;
 
 
     @Override
@@ -133,8 +133,20 @@ public class MainActivity extends AppCompatActivity {
         initNavigationDrawer(savedInstanceState);
         mNoFood = findViewById(R.id.no_food);
 
+        mHandler = new Handler();
+        mHandler.postDelayed(mRunnable, 3000);
+
 
     }
+
+    private final Runnable mRunnable = new Runnable() {
+        public void run() {
+            new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
+            mHandler.postDelayed(mRunnable, 3000);
+        }
+
+    };
+
 
     private void initNavigationDrawer(Bundle savedInstanceState) {
 
