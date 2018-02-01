@@ -225,8 +225,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
         mNoFood.setVisibility(View.GONE);
 
-        Log.v("cik", orderList.size() + "");
-        if (orderList.size() < 1) {
+        if (orderList == null) {
 
 
             mNoFood.setVisibility(View.VISIBLE);
