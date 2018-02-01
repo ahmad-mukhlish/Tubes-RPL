@@ -20,7 +20,7 @@
             android:layout_marginStart="16dp"
             android:text="@string/label_item_name"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="23sp" />
 
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_marginEnd="16dp"
             android:text="@string/label_qty"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="23sp" />
 
 
     </RelativeLayout>
@@ -57,6 +57,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="@string/button_done_all"
+        android:textSize="24dp"
+        android:padding="20dp"
         android:textColor="#FFFFFF" />
 
 

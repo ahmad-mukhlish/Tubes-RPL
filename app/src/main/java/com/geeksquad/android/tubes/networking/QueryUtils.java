@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -117,7 +118,7 @@ public final class QueryUtils {
     }
 
 
-    private static URL parseStringLinkToURL(String link) {
+    public static URL parseStringLinkToURL(String link) {
 
         URL url = null;
         try {
@@ -164,7 +165,7 @@ public final class QueryUtils {
                     for (int k = 0; k < bahan.length(); k++) {
                         JSONObject bahanNow = bahan.getJSONObject(k);
                         String namaBahan = bahanNow.getString("nama_bahan");
-                        int jumlahMakanan = bahanNow.getInt("jumlah_bahan");
+                        int jumlahMakanan = bahanNow.getInt("stok");
                         bahans.add(new Bahan(namaBahan, jumlahMakanan));
                     }
 
@@ -182,6 +183,53 @@ public final class QueryUtils {
         }
 
         return listOrders;
+    }
+
+    public static String putWithHttp(URL url, String message) throws IOException {
+
+        String jsonResponse = "";
+
+        if (url == null) {
+            return jsonResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+
+
+        InputStream inputStream = null;
+
+        try {
+
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("PUT");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setReadTimeout(10000 /*miliseconds*/);
+            urlConnection.setConnectTimeout(150000 /*miliseconds*/);
+
+            DataOutputStream dataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
+            dataOutputStream.writeBytes(message);
+            dataOutputStream.flush();
+            dataOutputStream.close();
+
+            urlConnection.connect();
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = QueryUtils.streamToSting(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code " + urlConnection.getResponseCode());
+            }
+
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error while retrieving jsonResponse", e);
+        } finally {
+            //close the url and input stream.. regardless exception thrown or not..
+            if (urlConnection != null)
+                urlConnection.disconnect();
+            if (inputStream != null)
+                inputStream.close();
+        }
+
+        return jsonResponse;
     }
 
 }

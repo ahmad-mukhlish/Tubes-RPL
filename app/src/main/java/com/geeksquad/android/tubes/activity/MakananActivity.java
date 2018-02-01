@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,10 @@ import com.geeksquad.android.tubes.entity.Makanan;
 import com.geeksquad.android.tubes.entity.Order;
 import com.geeksquad.android.tubes.networking.QueryUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 public class MakananActivity extends AppCompatActivity {
@@ -70,7 +75,7 @@ public class MakananActivity extends AppCompatActivity {
         public void onClick(View view) {
 
            int kodePesanan = mBundle.getInt("kodePesanan") ;
-           new ConfirmCookedAsyncTask(mContext).execute(Order.BASE_PATH + Order.JSON_CONFIRM + kodePesanan);
+           new ConfirmCookedAsyncTask(mContext, kodePesanan).execute(Order.BASE_PATH + Order.PUT_CONFIRM);
 
         }
     }
@@ -78,9 +83,11 @@ public class MakananActivity extends AppCompatActivity {
     private class ConfirmCookedAsyncTask extends AsyncTask<String, Void, String> {
 
         private Context mContext;
+        private int mkodePesanan;
 
-        ConfirmCookedAsyncTask(Context mContext) {
+        public ConfirmCookedAsyncTask(Context mContext, int kodePesanan) {
             this.mContext = mContext;
+            this.mkodePesanan = kodePesanan;
         }
 
         @Override
@@ -90,7 +97,11 @@ public class MakananActivity extends AppCompatActivity {
                 return null;
             }
 
-            QueryUtils.fetchResponse(urls[0]);
+            try {
+                QueryUtils.putWithHttp(QueryUtils.parseStringLinkToURL(urls[0]),createJsonMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             return null;
         }
@@ -101,6 +112,24 @@ public class MakananActivity extends AppCompatActivity {
             Toast.makeText(mContext, R.string.toast_confirm, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(mContext, MainActivity.class));
         }
+
+        private String createJsonMessage() {
+
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+
+                jsonObject.accumulate("pesanan", mkodePesanan);
+
+
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Error when create JSON message", e);
+            }
+
+            return jsonObject.toString();
+
+        }
+
     }
 
 

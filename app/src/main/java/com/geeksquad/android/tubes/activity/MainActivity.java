@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (isConnected) {
-            new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
+            new OrderAsyncTask().execute(Order.BASE_PATH);
         } else {
             error.setVisibility(View.VISIBLE);
         }
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
+                new OrderAsyncTask().execute(Order.BASE_PATH);
             }
         });
 
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final Runnable mRunnable = new Runnable() {
         public void run() {
-            new OrderAsyncTask().execute(Order.BASE_PATH + Order.JSON_REPLY_KOKI);
+            new OrderAsyncTask().execute(Order.BASE_PATH);
             mHandler.postDelayed(mRunnable, 3000);
         }
 
@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (urls[0] == null || urls.length < 1)
                 return null;
+
 
             return QueryUtils.fetchData(urls[0]);
         }

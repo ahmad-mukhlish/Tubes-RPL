@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.geeksquad.android.tubes.R;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class AboutRecycleAdapter extends RecyclerView.Adapter<AboutRecycleAdapter.AboutViewHolder> {
 
+    //TODO Personil should be square
     private final String LOG_TAG = AboutRecycleAdapter.class.getName();
 
     private Context mContext;
@@ -51,7 +53,7 @@ public class AboutRecycleAdapter extends RecyclerView.Adapter<AboutRecycleAdapte
 
     class AboutViewHolder extends RecyclerView.ViewHolder {
 
-        de.hdodenhof.circleimageview.CircleImageView mAvatar;
+        ImageView mAvatar;
         TextView mName;
         TextView mRole;
         View mItemView;

@@ -10,9 +10,12 @@ public class Order {
     public static String USERNAME = "admin";
     public static String PASSWORD = "jasuke";
 
-    public static final String BASE_PATH = "http://192.168.1.3/restoran/";
-    public static final String JSON_REPLY_KOKI = "server.php?operasi=rincian_koki";
-    public static final String JSON_CONFIRM = "server.php?operasi=konfirmasi_masak&kode_pesanan=";
+    //GET JSON
+    public static final String BASE_PATH = "http://192.168.1.11/ci-restserver/index.php/koki";
+
+    //PUT JSON
+    public static final String PUT_CONFIRM = "/konfirmasi";
+
 
 
     private int mMeja, mItems, mKodePesanan;

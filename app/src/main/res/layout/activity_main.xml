@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:elevation="4dp"
         android:theme="@style/ToolBarStyle"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
@@ -29,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             tool:text="Toolbar Title" />
@@ -110,10 +109,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:paddingBottom="10dp"
+                android:paddingBottom="20dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 tool:text="Pesanan Rabu, 15 Desember 2017" />
 
             <RelativeLayout
