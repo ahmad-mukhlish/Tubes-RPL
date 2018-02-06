@@ -11,7 +11,7 @@ public class Order {
     public static String PASSWORD = "jasuke";
 
     //GET JSON
-    public static final String BASE_PATH = "http://192.168.1.11/ci-restserver/index.php/koki";
+    public static final String BASE_PATH = "http://server.silentdev.com/index.php/koki";
 
     //PUT JSON
     public static final String PUT_CONFIRM = "/konfirmasi";
